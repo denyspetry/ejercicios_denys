@@ -17,7 +17,7 @@ public class Main {
         System.out.println("Introduce un número: ");
         int num1 = entradaEscaner.nextInt();
 
-        System.out.println("Introduce otro número: ");
+        System.out.println("Introduce un número distinto: ");
         int num2 = entradaEscaner.nextInt();
 
         int resultado = num1 + num2;
