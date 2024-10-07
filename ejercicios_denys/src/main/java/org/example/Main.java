@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner entradaEscaner = new Scanner(System.in);
+        /* Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("¿Cómo te llamas?: ");
         String nombre = entradaEscaner.next();
 
@@ -22,7 +22,10 @@ public class Main {
 
         int resultado = num1 + num2;
 
-        System.out.println("El resultado de sumar los dos números es: " + resultado);
+        System.out.println("El resultado de sumar los dos números es: " + resultado);*/
 
+
+        Bateria_ejercicios_sencillos Bateria = new Bateria_ejercicios_sencillos();
+        Bateria.ejercicio1();
     }
 }
