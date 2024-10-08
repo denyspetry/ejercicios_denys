@@ -28,6 +28,8 @@ public class Main {
         Bateria_ejercicios_sencillos Bateria = new Bateria_ejercicios_sencillos();
         //Bateria.ejercicio1();
         //Bateria.ejercicio2();
-        Bateria.ejercicio3();
+        //Bateria.ejercicio3();
+        //Bateria.ejercicio4();
+        Bateria.ejercicio5();
     }
 }
