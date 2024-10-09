@@ -30,6 +30,10 @@ public class Main {
         //Bateria.ejercicio2();
         //Bateria.ejercicio3();
         //Bateria.ejercicio4();
-        Bateria.ejercicio5();
+        //Bateria.ejercicio5();
+
+
+        Practicas practicas = new Practicas();
+        practicas.PRÁCTICA_3();
     }
 }
