@@ -34,6 +34,7 @@ public class Main {
 
 
         Practicas practicas = new Practicas();
-        practicas.PRÁCTICA_3();
+        //practicas.PRÁCTICA_3();
+        practicas.PRÁCTICA_4();
     }
 }
