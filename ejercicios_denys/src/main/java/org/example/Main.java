@@ -35,6 +35,13 @@ public class Main {
 
         Practicas practicas = new Practicas();
         //practicas.PRÁCTICA_3();
-        practicas.PRÁCTICA_4();
+        //practicas.PRÁCTICA_4();
+
+
+        BateriaEjerciciosString String = new BateriaEjerciciosString();
+        //String.ejercicio1();
+        //String.ejercicio2();
+        String.ejercicio3();
     }
+
 }
