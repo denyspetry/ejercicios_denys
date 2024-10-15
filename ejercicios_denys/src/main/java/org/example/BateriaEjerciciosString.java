@@ -56,12 +56,12 @@ public class BateriaEjerciciosString {
 
     public void ejecicio4() {
 
-        Scanner teclado = new Scanner(System.in);
+        /*Scanner teclado = new Scanner(System.in);
 
         System.out.println("Introduce una frase: ");
         String frase = teclado.nextLine();
         frase = " " + frase + " ";
-        frase = frase.replaceAll()
+        frase = frase.replaceAll();*/
 
     }
 }

@@ -41,7 +41,11 @@ public class Main {
         BateriaEjerciciosString String = new BateriaEjerciciosString();
         //String.ejercicio1();
         //String.ejercicio2();
-        String.ejercicio3();
+        //String.ejercicio3();
+
+
+        PrácticasUnidad2 practicas2 = new PrácticasUnidad2();
+        practicas2.Practica1NumSuerte();
     }
 
 }
