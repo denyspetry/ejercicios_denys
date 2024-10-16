@@ -51,7 +51,9 @@ public class Main {
         Excepciones excepciones = new Excepciones();
         //excepciones.excepciones1();
         //excepciones.actividad1Excepciones();
-        excepciones.generaciones();
+        //excepciones.generaciones();
+        excepciones.diaSemana();
+        //excepciones.alturaPersona();
     }
 
 }

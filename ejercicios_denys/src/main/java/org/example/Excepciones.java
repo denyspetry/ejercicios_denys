@@ -48,52 +48,90 @@ public class Excepciones {
 
         Scanner teclado = new Scanner(System.in);
 
-        String modo = teclado.next(); //Solo va a ser na palabra, no hace falta nextln
+        String modo = teclado.next(); //Solo va a ser una palabra, no hace falta nextln
 
         LocalDateTime hoy = LocalDateTime.now();
         int añoActual = hoy.getYear();
         int añoNacimiento = 1800;
         boolean error = false;
 
-        if (modo.equals("1")){
+        switch (modo){
+            case "1":
+                System.out.println("Introduce tu año de nacimiento: ");
 
-            System.out.println("Introduce tu año de nacimiento: ");
+                String año = teclado.next();
 
-            String año = teclado.next();
+                try{
+                    añoNacimiento = Integer.parseInt(año);
+                }catch (NumberFormatException e1){
+                    System.out.println("El formato del año no es correcto" + e1.getMessage());
+                }
 
-            try{
-                añoNacimiento = Integer.parseInt(año);
-            }catch (NumberFormatException e1){
-                System.out.println("El formato del año no es correcto" + e1.getMessage());
-            }
+                if (añoNacimiento < 1900 || añoNacimiento > añoActual){
+                    System.out.println("El año introducido no es correcto");
+                    error = true;
+                }
+                break;
+            case "2":
+                System.out.println("introduce tu edad: ");
+                int edad = 0;
 
-            if (añoNacimiento < 1900 || añoNacimiento > añoActual){
-                System.out.println("El año introducido no es correcto");
-                error = true;
-            }
-
-        } else if (modo.equals("2")) {
-
-            System.out.println("introduce tu edad: ");
-            int edad = 0;
-
-            if (teclado.hasNextInt()) {
-                edad = teclado.nextInt();
-            }else {
-                System.out.println("El formato de la edad es incorrecto");
-                error = true;
-            }
-            if (edad < 0){
-                System.out.println("La edad introducida no es correcto");
-                error = true;
-            }else{
-                añoNacimiento = añoActual - edad;
-            }
-
-        }else{
-            System.out.println("El modo no existe");
-            error = true;
+                if (teclado.hasNextInt()) {
+                    edad = teclado.nextInt();
+                }else {
+                    System.out.println("El formato de la edad es incorrecto");
+                    error = true;
+                }
+                if (edad < 0){
+                    System.out.println("La edad introducida no es correcto");
+                    error = true;
+                }else{
+                    añoNacimiento = añoActual - edad;
+                }
+                break;
+            default:
+                System.out.println("El modo no existe");
         }
+
+//        if (modo.equals("1")){
+//
+//            System.out.println("Introduce tu año de nacimiento: ");
+//
+//            String año = teclado.next();
+//
+//            try{
+//                añoNacimiento = Integer.parseInt(año);
+//            }catch (NumberFormatException e1){
+//                System.out.println("El formato del año no es correcto" + e1.getMessage());
+//            }
+//
+//            if (añoNacimiento < 1900 || añoNacimiento > añoActual){
+//                System.out.println("El año introducido no es correcto");
+//                error = true;
+//            }
+//
+//        } else if (modo.equals("2")) {
+//
+//            System.out.println("introduce tu edad: ");
+//            int edad = 0;
+//
+//            if (teclado.hasNextInt()) {
+//                edad = teclado.nextInt();
+//            }else {
+//                System.out.println("El formato de la edad es incorrecto");
+//                error = true;
+//            }
+//            if (edad < 0){
+//                System.out.println("La edad introducida no es correcto");
+//                error = true;
+//            }else{
+//                añoNacimiento = añoActual - edad;
+//            }
+//
+//        }else{
+//            System.out.println("El modo no existe");
+//            error = true;
+//        }
         if (!error) {
             if (añoNacimiento >= 1900 && añoNacimiento <= 1927) {
                 System.out.println("Eres de la generacion sin bautizar");
@@ -119,5 +157,77 @@ public class Excepciones {
            Generación Y o Millennials (nacidos entre 1982 y 1994).
            Generación Z o Centennials (nacidos entre 1995 y 2009 en adelante).    */
 
+    }
+
+
+    public void alturaPersona (){
+
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Introduce tu altura en centímetros: ");
+
+        int altura = 0;
+        altura = teclado.nextInt();
+
+        int categoria = 9999;
+
+        if (altura <= 150){
+            categoria = 0;
+        } else if (altura >= 151 && altura < 175 ){
+            categoria = 1;
+        } else if (altura >= 176){
+            categoria = 2;
+        }
+
+        switch (categoria) {
+
+            case 0:
+                System.out.println("Persona baja");
+                break;
+            case 1:
+                System.out.println("Persona de estatura media");
+                break;
+            case 2:
+                System.out.println("Persona alta");
+                break;
+            default:
+                System.out.println("Altura no válida");
+                break;
+        }
+
+    }
+
+
+    public void diaSemana (){
+
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Introduce un número entre 1 y 7 y te diré el día de la semana al que corresponde:");
+        int numero = teclado.nextInt();
+
+        switch (numero){
+
+            case 1:
+               System.out.println("LUNES");
+               break;
+            case 2:
+                System.out.println("MARTES");
+                break;
+            case 3:
+                System.out.println("MIÉRCOLES");
+                break;
+            case 4:
+                System.out.println("JUEVES");
+                break;
+            case 5:
+                System.out.println("VIERNES");
+                break;
+            case 6:
+                System.out.println("SÁBADO");
+                break;
+            case 7:
+                System.out.println("DOMINGO");
+                break;
+            default:
+                System.out.println("El número introducido no es válido");
+        }
     }
 }

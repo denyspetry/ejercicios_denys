@@ -47,4 +47,20 @@ public class PrácticasUnidad2 {
         System.out.println(resultadoCnum1 + " + " + resultadoCnum2 + " + " + resultadoCnum3 + " + " + resultadoCnum4 + " = " + numSuerte); //Mostramos toda la operación realizada
         System.out.println("Tu número de la suerte es: " + numSuerte); //Mostramos mensaje "Tu número de la suerte es: [numero_de_la_suerte]"
     }
+
+
+    public void Practica2Calculadora(){
+
+        int numero1 = 0;
+        int numero2 = 0;
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("HOLA, BIEVENIDO A MI CALCULADORA");
+        System.out.println("Introduce el primer número: ");
+        numero1 = entrada.nextInt();
+        System.out.println("Introduce el segundo número: ");
+        numero2 = entrada.nextInt();
+
+
+
+    }
 }
