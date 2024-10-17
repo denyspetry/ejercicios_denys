@@ -53,12 +53,44 @@ public class PrácticasUnidad2 {
 
         int numero1 = 0;
         int numero2 = 0;
+        float resultado = 0;
         Scanner entrada = new Scanner(System.in);
+
         System.out.println("HOLA, BIEVENIDO A MI CALCULADORA");
+
         System.out.println("Introduce el primer número: ");
         numero1 = entrada.nextInt();
+
+        System.out.println("Introduce el operador (+,-,*,/,R): ");
+        String operador = entrada.nextLine();
+        entrada.nextLine();
+
         System.out.println("Introduce el segundo número: ");
         numero2 = entrada.nextInt();
+
+        switch (operador){
+
+            case "+":
+                resultado = numero1 + numero2;
+                break;
+            case "-":
+                resultado = numero1 - numero2;
+                break;
+            case "*":
+                resultado = numero1 * numero2;
+                break;
+            case "/":
+                resultado = (float) numero1 / numero2;
+                break;
+            case "R":
+                if (numero1 > 0) {
+                    resultado = Math.sqrt(numero1);
+                }
+
+        }
+
+
+
 
 
 

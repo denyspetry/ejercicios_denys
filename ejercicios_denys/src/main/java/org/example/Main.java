@@ -46,13 +46,14 @@ public class Main {
 
         PrácticasUnidad2 practicas2 = new PrácticasUnidad2();
         //practicas2.Practica1NumSuerte();
+        practicas2.Practica2Calculadora();
 
 
         Excepciones excepciones = new Excepciones();
         //excepciones.excepciones1();
         //excepciones.actividad1Excepciones();
         //excepciones.generaciones();
-        excepciones.diaSemana();
+        //excepciones.diaSemana();
         //excepciones.alturaPersona();
     }
 
