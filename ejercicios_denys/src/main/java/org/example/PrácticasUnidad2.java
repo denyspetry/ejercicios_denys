@@ -123,27 +123,28 @@ public class PrácticasUnidad2 {
                     break;
 
                 case "/":
-                    if (numero2 != 0) {
-                        resultado = (float) numero1 / numero2;
-                        repetir = true;
-                    } else {
-                        System.out.println("No se puede dividir por 0");
-                        while (repetir2){
-                            System.out.println("Introduce un segundo número válido");
-                            if (entrada.hasNextInt()){
-                                numero2 = entrada.nextInt();
-                                entrada.nextLine();
-                                repetir2 = false;
-                            }
+                    while (numero2 == 0){
+                        System.out.println("Introduce un número distinto de 0");
+                        numero2 = entrada.nextInt();
+                        entrada.nextLine(); //Limpiamos el Buffer
+                    }
+                    resultado = (float) numero1 / numero2;
+                    repetir = false;
+                    break;
 
+                case "R":
+                    while (numero1<0) {
+                        System.out.println("ERROR, no se puede calcular la raíz cuadrada de un número negativo");
+                        System.out.println("Introduce otro número: ");
+                        numero1 = entrada.nextInt();
+                        entrada.nextLine();
+                        while (!entrada.hasNextInt()){
+                            System.out.println("ERROR");
                         }
                     }
+                    resultado = (float) Math.sqrt(numero1);
+                    repetir = false;
                     break;
-                case "R":
-                    if (numero1 > 0) {
-                        //resultado = Math.sqrt(numero1);
-                    }
-
             }
         }
         System.out.println("El resultado de la operación es: " + resultado);
