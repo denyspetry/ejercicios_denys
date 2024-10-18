@@ -51,48 +51,101 @@ public class PrácticasUnidad2 {
 
     public void Practica2Calculadora(){
 
+        Scanner entrada = new Scanner(System.in);
         int numero1 = 0;
         int numero2 = 0;
+        String operador = "";
         float resultado = 0;
-        Scanner entrada = new Scanner(System.in);
+        boolean repetir = true;
 
-        System.out.println("HOLA, BIEVENIDO A MI CALCULADORA");
 
-        System.out.println("Introduce el primer número: ");
-        numero1 = entrada.nextInt();
+        System.out.println("HOLA, BIENVENIDO A MI CALCULADORA");
 
-        System.out.println("Introduce el operador (+,-,*,/,R): ");
-        String operador = entrada.nextLine();
-        entrada.nextLine();
+        //Pedimos el primer número
+        while (repetir) {
+            System.out.println("Introduce el primer número: ");
 
-        System.out.println("Introduce el segundo número: ");
-        numero2 = entrada.nextInt();
+            if (entrada.hasNextInt()) {
+                numero1 = entrada.nextInt();
+                entrada.nextLine(); //Necesario para que al pedir el operador no haya error
+                repetir = false;
+            } else {
+                System.out.println("El valor introducido debe de ser un número entero");
+                entrada.nextLine(); //Necesario para que no entre en bucle, ya que si no siempre mostraría los dos mensajes de arriba
+            }
+        }
 
-        switch (operador){
+        //Pedimos el operador
+        repetir = true;
+        while (repetir) {
+            System.out.println("Introduce el operador (+,-,*,/,R): ");
 
-            case "+":
-                resultado = numero1 + numero2;
-                break;
-            case "-":
-                resultado = numero1 - numero2;
-                break;
-            case "*":
-                resultado = numero1 * numero2;
-                break;
-            case "/":
-                resultado = (float) numero1 / numero2;
-                break;
-            case "R":
-                if (numero1 > 0) {
-                    resultado = Math.sqrt(numero1);
+            if (entrada.hasNextLine()) {
+                operador = entrada.nextLine().toUpperCase();
+
+                if (operador.equals("+") || operador.equals("-") || operador.equals("*") || operador.equals("/") || operador.equals("R")) {
+                    repetir = false;
+                }else{
+                    System.out.println("Debes introducir un operador válido");
                 }
+            }
+        }
 
+        //Pedimos el segundo número excepto si el operador introducido es "R"
+        if (!operador.equals("R")) {
+            System.out.println("Introduce el segundo número: ");
+
+            while (!entrada.hasNextInt()){
+                System.out.println("El valor introducido tiene que ser un número entero");
+            }
+            numero2 = entrada.nextInt();
         }
 
 
+        repetir = true;
+        boolean repetir2 = true;
+        while (repetir) {
+            switch (operador) {
 
+                case "+":
+                    resultado = numero1 + numero2;
+                    repetir = false;
+                    break;
 
+                case "-":
+                    resultado = numero1 - numero2;
+                    repetir = false;
+                    break;
 
+                case "*":
+                    resultado = numero1 * numero2;
+                    repetir = false;
+                    break;
 
+                case "/":
+                    if (numero2 != 0) {
+                        resultado = (float) numero1 / numero2;
+                        repetir = true;
+                    } else {
+                        System.out.println("No se puede dividir por 0");
+                        while (repetir2){
+                            System.out.println("Introduce un segundo número válido");
+                            if (entrada.hasNextInt()){
+                                numero2 = entrada.nextInt();
+                                entrada.nextLine();
+                                repetir2 = false;
+                            }
+
+                        }
+                    }
+                    break;
+                case "R":
+                    if (numero1 > 0) {
+                        //resultado = Math.sqrt(numero1);
+                    }
+
+            }
+        }
+        System.out.println("El resultado de la operación es: " + resultado);
     }
 }
