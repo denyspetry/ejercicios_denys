@@ -91,35 +91,35 @@ public class PrácticasUnidad2 {
             }
         }
 
+        repetir = true;
         //Pedimos el segundo número excepto si el operador introducido es "R"
         if (!operador.equals("R")) {
-            System.out.println("Introduce el segundo número: ");
+            while (repetir){
+                System.out.println("Introduce el segundo número: ");
 
-            while (!entrada.hasNextInt()){
-                System.out.println("El valor introducido tiene que ser un número entero");
+                if(entrada.hasNextInt()){
+                    numero2 = entrada.nextInt();
+                    entrada.nextLine(); //Lo introducimos para limpiar el buffer
+                    repetir = false;
+                }else {
+                System.out.println("No puedes introducir un caracter");
+                entrada.nextLine(); //Si no introducimos una nueva entrada de texto, se queda en bucle entre los dos System.out.println
+                }
             }
-            numero2 = entrada.nextInt();
         }
 
-
-        repetir = true;
-        boolean repetir2 = true;
-        while (repetir) {
-            switch (operador) {
+        switch (operador) {
 
                 case "+":
                     resultado = numero1 + numero2;
-                    repetir = false;
                     break;
 
                 case "-":
                     resultado = numero1 - numero2;
-                    repetir = false;
                     break;
 
                 case "*":
                     resultado = numero1 * numero2;
-                    repetir = false;
                     break;
 
                 case "/":
@@ -129,7 +129,6 @@ public class PrácticasUnidad2 {
                         entrada.nextLine(); //Limpiamos el Buffer
                     }
                     resultado = (float) numero1 / numero2;
-                    repetir = false;
                     break;
 
                 case "R":
@@ -138,14 +137,9 @@ public class PrácticasUnidad2 {
                         System.out.println("Introduce otro número: ");
                         numero1 = entrada.nextInt();
                         entrada.nextLine();
-                        while (!entrada.hasNextInt()){
-                            System.out.println("ERROR");
-                        }
                     }
                     resultado = (float) Math.sqrt(numero1);
-                    repetir = false;
                     break;
-            }
         }
         System.out.println("El resultado de la operación es: " + resultado);
     }
