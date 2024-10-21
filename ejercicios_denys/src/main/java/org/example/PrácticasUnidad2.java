@@ -143,4 +143,53 @@ public class PrácticasUnidad2 {
         }
         System.out.println("El resultado de la operación es: " + resultado);
     }
+
+
+    public void Practica3ISBN(){
+
+        //Definición de variables de tipo entero
+        int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0, n10 = 0;
+        int resultado = 0;
+        int comprobador = 0;
+
+        Scanner entrada = new Scanner(System.in); //Definición de Scanner como entrada
+
+        System.out.println("HOLA, BIENVENIDO AL COMPROBADOR DE ISBN");
+        System.out.println("Introduzca un ISBN: ");
+        String isbn = entrada.nextLine();
+
+        while (isbn.length() != 10){
+            System.out.println("Introduzca un ISBN de 10 números: ");
+            isbn = entrada.nextLine();
+        }
+
+        //Guardamos cada uno de los caracteres de la cadena de texto como entero
+        n1 = Integer.parseInt(String.valueOf(isbn.charAt(0)));
+        n2 = Integer.parseInt(String.valueOf(isbn.charAt(1)));
+        n3 = Integer.parseInt(String.valueOf(isbn.charAt(2)));
+        n4 = Integer.parseInt(String.valueOf(isbn.charAt(3)));
+        n5 = Integer.parseInt(String.valueOf(isbn.charAt(4)));
+        n6 = Integer.parseInt(String.valueOf(isbn.charAt(5)));
+        n7 = Integer.parseInt(String.valueOf(isbn.charAt(6)));
+        n8 = Integer.parseInt(String.valueOf(isbn.charAt(7)));
+        n9 = Integer.parseInt(String.valueOf(isbn.charAt(8)));
+        n10 = Integer.parseInt(String.valueOf(isbn.charAt(9)));
+
+        resultado = (n1*10) + (n2*9) + (n3*8) + (n4*7) + (n5*6) + (n6*5) + (n7*4) + (n8*3) + (n9*2) + (n10);
+        System.out.println("El resultado es: " + resultado);
+
+        comprobador = resultado % 11;
+        System.out.println("El resto de dividir entre 11 el resultado es: " + comprobador);
+
+        switch (comprobador){
+
+            case 0:
+                System.out.println("El ISBN es válido");
+                break;
+
+            default:
+                System.out.println("El ISBN no es válido");
+                break;
+        }
+    }
 }
