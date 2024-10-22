@@ -164,7 +164,7 @@ public class PrácticasUnidad2 {
         }
 
         //Guardamos cada uno de los caracteres de la cadena de texto como entero
-        n1 = Integer.parseInt(String.valueOf(isbn.charAt(0)));
+        /* n1 = Integer.parseInt(String.valueOf(isbn.charAt(0)));
         n2 = Integer.parseInt(String.valueOf(isbn.charAt(1)));
         n3 = Integer.parseInt(String.valueOf(isbn.charAt(2)));
         n4 = Integer.parseInt(String.valueOf(isbn.charAt(3)));
@@ -173,15 +173,52 @@ public class PrácticasUnidad2 {
         n7 = Integer.parseInt(String.valueOf(isbn.charAt(6)));
         n8 = Integer.parseInt(String.valueOf(isbn.charAt(7)));
         n9 = Integer.parseInt(String.valueOf(isbn.charAt(8)));
-        n10 = Integer.parseInt(String.valueOf(isbn.charAt(9)));
+        n10 = Integer.parseInt(String.valueOf(isbn.charAt(9))); */
 
-        resultado = (n1*10) + (n2*9) + (n3*8) + (n4*7) + (n5*6) + (n6*5) + (n7*4) + (n8*3) + (n9*2) + (n10);
-        System.out.println("El resultado es: " + resultado);
+        /* resultado = (n1*10) + (n2*9) + (n3*8) + (n4*7) + (n5*6) + (n6*5) + (n7*4) + (n8*3) + (n9*2) + (n10);
+        System.out.println("El resultado es: " + resultado); */
 
-        comprobador = resultado % 11;
+        String caracterFinal = String.valueOf(isbn.toUpperCase().charAt(9));
+        int numero = 0;
+        int multiplicion = 0;
+        int i = 0;
+        int j = 0;
+        int sumaFinal = 0;
+        int suma = 0;
+
+        switch (caracterFinal){
+
+            case "X":
+                for (i = 10 ; i >= 2 ; i--) {
+
+                    numero = Integer.parseInt(String.valueOf(isbn.charAt(j)));
+                    j++;
+                    multiplicion = i * numero;
+                    System.out.println(numero + " * " + i );
+                    suma += multiplicion;
+                }
+                sumaFinal = suma + 10;
+                System.out.println(sumaFinal);
+                break;
+
+            default:
+                for (i = 10 ; i >= 1 ; i--) {
+
+                    numero = Integer.parseInt(String.valueOf(isbn.charAt(j)));
+                    j++;
+                    multiplicion = i * numero;
+                    System.out.println(numero + " * " + i );
+                    sumaFinal += multiplicion;
+
+                }
+                System.out.println(sumaFinal);
+                break;
+        }
+
+        comprobador = sumaFinal % 11;
         System.out.println("El resto de dividir entre 11 el resultado es: " + comprobador);
 
-        switch (comprobador){
+        switch (comprobador) {
 
             case 0:
                 System.out.println("El ISBN es válido");
