@@ -147,10 +147,6 @@ public class PrácticasUnidad2 {
 
     public void Practica3ISBN(){
 
-        //Definición de variables de tipo entero
-        int resultado = 0;
-        int comprobador = 0;
-
         Scanner entrada = new Scanner(System.in); //Definición de Scanner como entrada
 
         System.out.println("HOLA, BIENVENIDO AL COMPROBADOR DE ISBN");
@@ -163,26 +159,41 @@ public class PrácticasUnidad2 {
         }
 
         if (isbn.contains("?")){
+
             int posicionInterrogacion = isbn.indexOf("?");
 
             int suma = 0; // Para almacenar la suma de las multiplicaciones de cada dígito por su posición
 
-            // Recorremos cada dígito del ISBN
-            for (int i = 0; i < 10; i++) {
-                if (i != posicionInterrogacion) { //Cuando detecte que el contador i, llegue a la posición de ?, saltará el if y no lo aplicará a la suma
-                    int digito = Integer.parseInt(String.valueOf(isbn.charAt(i))); //Extraemos el dígito de cada posición
-                    suma += digito * (10 - i); // Sumamos en cada pasada el resultado de multiplicar el número de cada posición por 10, 9, 8,...
+
+            try {
+                // Recorremos cada dígito del ISBN
+                for (int i = 0; i < 10; i++) {
+                    if (i != posicionInterrogacion) { //Cuando detecte que el contador i, llegue a la posición de ?, saltará el if y no lo aplicará a la suma
+                        int digito = Integer.parseInt(String.valueOf(isbn.charAt(i))); //Extraemos el dígito de cada posición
+                        suma += digito * (10 - i); // Sumamos en cada pasada el resultado de multiplicar el número de cada posición por 10, 9, 8,...
+                    }
+                }
+            } catch (NumberFormatException e ){
+                System.out.println("Error: El ISBN contiene caracteres no numéricos." + e.getMessage());
+                return;  //Salimos del metodo
+            }
+
+
+            // Ahora probamos todos los posibles valores para el '?', desde 0 hasta 10
+            for (int posibleDigito = 0; posibleDigito <= 10; posibleDigito++) {
+
+                int nuevaSuma = suma + posibleDigito * (10 - posicionInterrogacion);
+
+                if (nuevaSuma % 11 == 0) { // Si encontramos un múltiplo de 11, ese es el dígito faltante
+                    if (posibleDigito == 10) {
+                        System.out.println("El número que debe reemplazar el '?' es: X");
+                    } else {
+                        System.out.println("El número que debe reemplazar el '?' es: " + posibleDigito);
+                    }
+                    return;
                 }
             }
-            
-            int valorFaltante = ;  // Calculamos el número que debe ir en la posición del "?"
 
-            // Si el valor es 10, el dígito en la última posición debe ser 'X'
-            if (valorFaltante == 10 && posicionInterrogacion == 9) {
-                System.out.println("El número que debe reemplazar el '?' es: X");
-            } else {
-                System.out.println("El número que debe reemplazar el '?' es: " + valorFaltante);
-            }
         } else {
 
             String caracterFinal = String.valueOf(isbn.toUpperCase().charAt(9));
@@ -193,36 +204,41 @@ public class PrácticasUnidad2 {
             int sumaFinal = 0;
             int suma = 0;
 
-            switch (caracterFinal) {
+            try { //Aplicamos el try a switch ya que ambos case contienen Integer.parseInt
+                switch (caracterFinal) {
 
-                case "X":
-                    for (i = 10; i >= 2; i--) {
+                    case "X":
+                        for (i = 10; i >= 2; i--) {
 
-                        numero = Integer.parseInt(String.valueOf(isbn.charAt(j)));
-                        j++;
-                        multiplicion = i * numero;
-                        System.out.println(numero + " * " + i);
-                        suma += multiplicion;
-                    }
-                    sumaFinal = suma + 10;
-                    System.out.println(sumaFinal);
-                    break;
+                            numero = Integer.parseInt(String.valueOf(isbn.charAt(j)));
+                            j++;
+                            multiplicion = i * numero;
+                            System.out.println(numero + " * " + i);
+                            suma += multiplicion;
+                        }
+                        sumaFinal = suma + 10;
+                        System.out.println(sumaFinal);
+                        break;
 
-                default:
-                    for (i = 10; i >= 1; i--) {
+                    default:
+                        for (i = 10; i >= 1; i--) {
 
-                        numero = Integer.parseInt(String.valueOf(isbn.charAt(j)));
-                        j++;
-                        multiplicion = i * numero;
-                        System.out.println(numero + " * " + i);
-                        sumaFinal += multiplicion;
+                            numero = Integer.parseInt(String.valueOf(isbn.charAt(j)));
+                            j++;
+                            multiplicion = i * numero;
+                            System.out.println(numero + " * " + i);
+                            sumaFinal += multiplicion;
 
-                    }
-                    System.out.println(sumaFinal);
-                    break;
+                        }
+                        System.out.println(sumaFinal);
+                        break;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Error: El ISBN contiene caracteres no numéricos." + e.getMessage()); //Mostramos el siguiente mensaje de error
+                return;  //Salimos del metodo
             }
 
-            comprobador = sumaFinal % 11;
+            int comprobador = sumaFinal % 11;
             System.out.println("El resto de dividir: " + sumaFinal + " entre 11 es: " + comprobador);
 
             switch (comprobador) {
