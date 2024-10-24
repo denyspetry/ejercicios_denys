@@ -47,7 +47,7 @@ public class Main {
         PrácticasUnidad2 practicas2 = new PrácticasUnidad2();
         //practicas2.Practica1NumSuerte();
         //practicas2.Practica2Calculadora();
-        practicas2.Practica3ISBN();
+        //practicas2.Practica3ISBN();
 
 
         Excepciones excepciones = new Excepciones();
@@ -56,6 +56,14 @@ public class Main {
         //excepciones.generaciones();
         //excepciones.diaSemana();
         //excepciones.alturaPersona();
+
+
+        Aleatorios aleatorios = new Aleatorios();
+        //aleatorios.aleatorios();
+        //aleatorios.randomEjercicio1();
+        //aleatorios.randomEjercicio2();
+        //aleatorios.randomEjercicio3();
+        aleatorios.randomEjercicio4();
     }
 
 }
