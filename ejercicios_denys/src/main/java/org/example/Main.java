@@ -63,7 +63,14 @@ public class Main {
         //aleatorios.randomEjercicio1();
         //aleatorios.randomEjercicio2();
         //aleatorios.randomEjercicio3();
-        aleatorios.randomEjercicio4();
+        //aleatorios.randomEjercicio4();
+
+
+        ARRAYs arrays = new ARRAYs();
+        //arrays.vectores();
+        //arrays.ejercicio1();
+        //arrays.ejercicio2();
+        arrays.ejercicio3();
     }
 
 }
