@@ -55,13 +55,21 @@ public class ARRAYs {
         System.out.println("Introduce los numeros a invertir...");
 
         for (int i = 0; i < numeros.length; i++){
-
             numeros [i] = teclado.nextInt();
-
         }
 
-        for (int i = numeros.length - 1; i >= 0; i--){
-            System.out.println(" " + numeros[i] + " ");
+    /*    for (int i = numeros.length - 1; i >= 0; i--){
+            System.out.print(" " + numeros[i] + " ");
+        } */
+
+        int tam_mitad = numeros.length / 2;
+        int aux = 0;
+
+        for (int i = 0; i < tam_mitad; i++){
+
+            aux = numeros[i];
+            numeros[i] = numeros[tam_mitad + i];
+            numeros[tam_mitad + i] = aux;
         }
 
     }
@@ -107,5 +115,43 @@ public class ARRAYs {
 
         System.out.println("Tu numero aparece " + contador + " veces");
 
+    }
+
+    public void ejercicio4(){}
+
+    public void ejercicio5(){
+
+        Scanner teclado = new Scanner(System.in);
+
+        int vector [] = new int[5];
+
+        for (int i = 0; i < vector.length; i++){
+            System.out.println("Introduce un numero: ");
+            vector[i] = teclado.nextInt();
+        }
+
+        System.out.println("El vector es: ");
+
+        for (int i = 0; i < vector.length; i++){
+            System.out.print(" " + vector[i] + " ");
+        }
+
+        System.out.println("");
+
+        int ultimaPosicion = vector[vector.length-1];
+
+        for (int i = vector.length-1; i >= 0; i--){
+
+            if (i == 0){
+                vector[i] = ultimaPosicion;
+            }else {
+                vector[i] = vector[i] - 1;
+            }
+        }
+
+        System.out.println("El vector es ahora: ");
+        for (int i = 0; i < vector.length; i++){
+            System.out.print(" " + vector[i] + " ");
+        }
     }
 }

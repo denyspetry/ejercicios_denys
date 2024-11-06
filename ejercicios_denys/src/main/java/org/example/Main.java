@@ -70,7 +70,9 @@ public class Main {
         //arrays.vectores();
         //arrays.ejercicio1();
         //arrays.ejercicio2();
-        arrays.ejercicio3();
+        //arrays.ejercicio3();
+        //arrays.ejercicio4();
+        arrays.ejercicio5();
     }
 
 }
