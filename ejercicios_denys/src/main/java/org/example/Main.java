@@ -72,7 +72,8 @@ public class Main {
         //arrays.ejercicio2();
         //arrays.ejercicio3();
         //arrays.ejercicio4();
-        arrays.ejercicio5();
+        //arrays.ejercicio5();
+        arrays.ejercicio6();
     }
 
 }

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -117,7 +118,31 @@ public class ARRAYs {
 
     }
 
-    public void ejercicio4(){}
+    public void ejercicio4(){
+
+        Scanner teclado = new Scanner(System.in);
+
+        int antiguoVector [] = {1,3,5,7,9};
+        int nuevoVector [] = new int[antiguoVector.length-1];
+
+        System.out.println("El vector es:");
+        System.out.println(Arrays.toString(antiguoVector));
+
+        System.out.println("Introduce el índice a eliminar: ");
+        int indiceEliminar = teclado.nextInt();
+
+        for (int i = 0; i < antiguoVector.length-1; i++){
+
+            if (i < indiceEliminar){
+                nuevoVector[i] = antiguoVector[i];
+            }else {
+                nuevoVector[i] = antiguoVector[i+1];
+            }
+        }
+
+        System.out.println("El vector nuevo es:");
+        System.out.println(Arrays.toString(nuevoVector));
+    }
 
     public void ejercicio5(){
 
@@ -153,5 +178,24 @@ public class ARRAYs {
         for (int i = 0; i < vector.length; i++){
             System.out.print(" " + vector[i] + " ");
         }
+    }
+
+    public void ejercicio6(){
+
+        Scanner teclado = new Scanner(System.in);
+
+        int palindromos [] = {1,2,3,1,1};
+        String esSimetrico = "Si";
+
+        for (int i = 0; i < palindromos.length; i++){
+            if (palindromos [i] == palindromos[palindromos.length -1 - i]){
+                esSimetrico = "Si";
+                continue;
+            }else {
+                esSimetrico = "No";
+                break;
+            }
+        }
+        System.out.println("El vector es simetrico: " + esSimetrico);
     }
 }
