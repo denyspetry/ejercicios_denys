@@ -73,7 +73,11 @@ public class Main {
         //arrays.ejercicio3();
         //arrays.ejercicio4();
         //arrays.ejercicio5();
-        arrays.ejercicio6();
+        //arrays.ejercicio6();
+
+
+        PrácticasUnidad3 prácticas = new PrácticasUnidad3();
+        prácticas.batallaSamurais();
     }
 
 }
