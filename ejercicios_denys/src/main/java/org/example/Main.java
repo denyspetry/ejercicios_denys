@@ -77,7 +77,10 @@ public class Main {
 
 
         PrácticasUnidad3 prácticas = new PrácticasUnidad3();
-        prácticas.batallaSamurais();
+        //prácticas.batallaSamurais();
+
+        vectores vectores = new vectores();
+        vectores.ruleta();
     }
 
 }
