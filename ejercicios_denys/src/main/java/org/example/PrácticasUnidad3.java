@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -166,6 +167,231 @@ public class PrácticasUnidad3 {
             System.out.println("> ¡Equipo 2 GANA! Equipo 1 ha tenido " + bajasEquipo1 + " bajas.");
         }else {
             System.out.println("> EMPATE");
+        }
+    }
+
+    public void sorteoPrimitiva(){
+
+        // Definición de Random y Scanner
+        Random random = new Random();
+        Scanner entrada = new Scanner(System.in);
+
+        //Enseñar en consola mensajes de bienvenida y de instrucciones de funcionamiento del programa
+        System.out.println("BIENVENIDO AL SORTEO DE LA PRIMITIVA");
+        System.out.println("Los 6 primeros números tienen que ser valores entre 1 y 49 y el reintegro entre 0 y 9");
+        System.out.println("Introduce tu boleto siguiendo el siguiente formato 'N-N-N-N-N-N/R': ");
+        String entradaUsuario = entrada.nextLine();
+        //Almacenamiento en variable de la entrada que le hemos pedido al usuario
+
+
+
+        // VALIDACIÓN ENTRADA USUARIO
+
+
+        // Comprobamos que la entrada del usuario se adecua a lo que pedimos, si no es así nos mada mensaje ERROR y se sale del programa
+        // Usamos un if para controlar que: "Si la entrada del usuario no es como te digo, no concuerda con lo que pedimos", es decir 11-11-11-11-11-11/1,
+        // siendo 1 de momento cualquier número o dígito, muestre un mensaje de ERROR y salgamos del programa con return;
+        if (!entradaUsuario.matches("\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}/\\d")){
+            System.out.println("ERROR. Formato no válido.");
+            return;
+        }
+
+
+        // Como la entrada es correcta, guardamos la entrada del usuario como vector de tipo String separando guiones y barras con .split("[-/]")
+        String entradaUsuarioVector[] = entradaUsuario.split("[-/]");
+
+
+        // Convertimos vector de tipo String a tipo numérico para poder operar con él, para ello definimos un nuevo vector de tipo numérico
+        // de longitud 7 (los 6 primeros números + el reintegro). Luego usamos un bucle for para recorrer todos los valores del nuevo vector creado
+        // y en cada uno de esos valores cambiamos el valor de su homólogo en String (entradaUsuarioVector) para que queden en formato numérico con
+        // Integer.parseInt()
+        int numerosUsuario[] = new int[7];
+        for (int i = 0; i < entradaUsuarioVector.length; i++){
+            numerosUsuario[i] = Integer.parseInt(entradaUsuarioVector[i]);
+        }
+
+
+        // Comprobación de que los 6 primeros números esten entre 1 y 49
+        // El reintegro no hace falta comprobarlo, pues ya el métod .matches asegura que sea un dígito entre 0 y 9
+        // Para ello usamos un bucle for que recorra el vector menos la última posición (la del reintegro) por eso i < numerosUsuario.length-1
+        // Si al recorrer estas 6 primeras posiciones detectamos con if que alguno de los números es menor que 1 o mayor que 49 (||), mostramos
+        // mensaje de ERROR y salimos del programa con return;
+        for (int i = 0; i < numerosUsuario.length-1; i++){
+            if (numerosUsuario[i] < 1 || numerosUsuario[i] > 49){
+                System.out.println("ERROR. El valor de cada número tiene que estar entre 1 y 49");
+                return;
+            }
+        }
+
+
+        // Comprobamos que no hayan números repetidos
+        // Usamos 2 bucles for que recorren los 6 primeros números, a excepción del segundo bucle (j) que empieza desde la siguiente posición
+        // ya que si no, nos mostraría constantemente que hay números repetidos aunque no los haya. Comprobamos si los números en la poición i son
+        // iguales que los de la posición j. Si se detecta que hay algún duplicado, mostramos mensaje de ERROR y salimos del programa con return;
+        for (int i = 0; i < numerosUsuario.length-1; i++){
+            for (int j = i+1; j < numerosUsuario.length-1; j++){
+                if (numerosUsuario[i] == numerosUsuario[j]){
+                    System.out.println("ERROR. Los números no pueden estar repetidos");
+                    return;
+                }
+            }
+        }
+
+        // Mostramos el boleto del usuario
+        System.out.println("\nBoleto Usuario:");
+        System.out.println(Arrays.toString(numerosUsuario));
+        //FIN DE LAS COMPROBACIONES DE ENTRADA
+
+
+
+        // BOLETO DE LA MÁQUINA
+
+
+        // Definimos la longitud del boleto de la máquina como un vector de longitud 6 (los 6 primeros números). El reintegro y el
+        // complementario los calcularemos a parte.
+        int boletoMaquina[] = new int[6];
+        boolean duplicado = true;
+        // Definimos variable duplicado para conmutar entre true/false dependiendo si encontramos duplicados o no en el bucle while
+        // inmediatamente siguiente.
+
+
+        // Damos a cada posición del boleto de la máquina, un número aleatorio entre 1 y 49 y controlamos que no sea un
+        // valor que ya se encuentre repetido en el vector. En caso de que ya se encuentre repetido, volveremos a recalcularlo conmutando el booleano "duplicado".
+        // Para ello usamos un bucle for que recorra todas las posiciones del vector boletoMaquina. Que nos calcule un número aleatorio, al menos una vez, al que por
+        // defecto daremos como válido (duplicado = false;). Necesitamos un segundo bucle for con el que poder recorrer las posiciones de los valores ya creados y
+        // poder comparar los numeros aleatorios, por ello j empezará desde 0 pero se ejecutará cuando i sea 1 y llegará hasta la posición j = 5 como máximo.
+        // Si se detecta algún número duplicado conmutamos duplicado a true para que el bucle while vuelva a recalcular un nuevo número aleatorio para la posición en i.
+        for (int i = 0; i < boletoMaquina.length; i++){
+            do {
+                boletoMaquina[i] = random.nextInt(49)+1;
+                duplicado = false;
+                for (int j = 0; j < i; j++){
+                    if (boletoMaquina[i] == boletoMaquina[j]){
+                        duplicado = true;
+                        break;
+                    }
+                }
+            }while (duplicado);
+        }
+
+
+        // Actualizamos duplicado a true para poder entrar en el siguiente bucle while
+        duplicado = true;
+        int complementario = 0;
+        // Definición de la variable numérica complementario
+
+
+        // Cálculo del número complementario con un bucle while que se ejecutará, al menos, 1 vez (duplicado = true;)
+        // Calculamos el número complementario aleatorio y, dentro del bucle for (que lo usamos para recorrer las posiciones
+        // del vector boletoMaquina), comprobamos si contiene un numero que sea igual, que será duplicado, en cuyo caso se actualizará
+        // duplicado a true, se sale del bucle for con break; y volverá a recalcular otro número aleatorio con while.
+        // En caso contrario duplicado será false y se dará el complementario como válido.
+        while (duplicado){
+            complementario = random.nextInt(49)+1;
+            for (int i = 0; i < boletoMaquina.length; i++){
+                if (complementario == boletoMaquina[i]){
+                    duplicado = true;
+                    break;
+                }else {
+                    duplicado = false;
+                }
+            }
+        }
+
+
+        // Definición de Reintegro (número aleatorio entre 0 y 9)
+        int reintegro = random.nextInt(10);
+
+
+        //Muestra de mensajes en consola
+        System.out.println("\nSORTEO:");
+        System.out.println(Arrays.toString(boletoMaquina));
+        System.out.println("Número Complementario:");
+        System.out.println(complementario);
+        System.out.println("Reintegro:");
+        System.out.println(reintegro);
+
+
+
+        // PREMIOS
+
+
+        // Para distribuir los premios, definiremos la lógica en función del número de aciertos y de qué tipo sea
+        // (el acierto del complementario y del reintegro hay que tenerlos en cuenta)
+        // Definimos variable contador aciertos desde el número 0 (posteriormente se actualizará)
+        int aciertos = 0;
+
+
+        // Necesitamos comprobar 2 boletos: el nuestro y el de la máquina, por ello nos hace falta 2 búcles for, cada uno para su
+        // respectivo vector (numerosUsuario y boletoMaquina). Por cada posición de los números del usuario, comprobaremos cada valor
+        // del boleto de la máquina. Hay que matizar que el bucle del numeroUsuario llega hasta i < numerosUsuario.length-1; ya que no
+        // tenemos en cuenta el reintegro. Si encontramos en alguna posición que los números de los boletos coincides, sumaremos 1 acierto
+        // a la variable aciertos definida anteriormente.
+        for (int i = 0; i < numerosUsuario.length-1; i++){
+            for (int j = 0; j < boletoMaquina.length; j++){
+                if (numerosUsuario[i] == boletoMaquina[j]) {
+                    aciertos++;
+                }
+            }
+        }
+
+
+        // Comprobamos que este el reintegro acertado. Para ello definimos un booleano reintegroAcertado y un contador específico
+        // aciertoReintegro que se actualizarán a true y a 1 respectivamente si (if) el valor del boleto del usuario en la posición 6 (reintegro) es
+        // igual que el reintegro del boleto de la máquina
+        boolean reintegroAcertado = false;
+        int aciertoReintegro = 0;
+        if (numerosUsuario[6] == reintegro){
+            aciertoReintegro = 1;
+            reintegroAcertado = true;
+        }
+
+
+        // Comprobamos que este el complementario acertado. Para ello definimos un booleano complementarioAcertado y un contador específico
+        // aciertoComplementario que se actualizarán a true y a 1 respectivamente si (if) alguno de los valores del boleto del usuario recorridos
+        // con el bucle for hasta la posición que no incluye el reintegro (i < numerosUsuario.length-1;) coincide con el complementario que ha salido
+        // en el boleto de la máquina
+        int aciertoComplementario = 0;
+        boolean complementarioAcertado = false;
+        for (int i = 0; i < numerosUsuario.length-1; i++){
+            if (numerosUsuario[i] == complementario){
+                aciertoComplementario = 1;
+                complementarioAcertado = true;
+                break;
+            }
+        }
+
+        System.out.println("\nRESULTADOS:");
+
+
+        // Definimos la lógica de los premios, con if-else-if para decidir qué mensaje de premio mostrar
+        // Para ello nos hacen falta los booleanos y contadores individuales del reintegro y del complementario.
+        // En función de los aciertos que hayamos tenido y de, si alguno de esos aciertos es de un número complementario
+        // o del reintegro, mostraremos en pantalla la categoría de premio a mostrar con el número de aciertos en caso de
+        // haber acertado algo. Si no hemos acertado nada el programa mostrará: "No premiado. No ha habido suerte..."
+        if (aciertos == 6 && reintegroAcertado){
+            System.out.println((aciertos+aciertoReintegro) + " Aciertos.");
+            System.out.println("¡Categoría Especial!");
+        } else if (aciertos == 6) {
+            System.out.println(aciertos + " Aciertos.");
+            System.out.println("¡1ª Categoría!");
+        } else if (aciertos == 5 && complementarioAcertado) {
+            System.out.println((aciertos + aciertoComplementario) + " Aciertos.");
+            System.out.println("¡2ª Categoría!");
+        } else if (aciertos == 5) {
+            System.out.println(aciertos + " Aciertos.");
+            System.out.println("¡3ª Categoría!");
+        } else if (aciertos == 4) {
+            System.out.println(aciertos + " Aciertos.");
+            System.out.println("¡4ª Categoría!");
+        } else if (aciertos == 3) {
+            System.out.println(aciertos + " Aciertos.");
+            System.out.println("¡5ª Categoría!");
+        } else if (reintegroAcertado) {
+            System.out.println(aciertoReintegro + " Aciertos.");
+            System.out.println("Reintegro");
+        } else {
+            System.out.println("No premiado. No ha habido suerte...");
         }
     }
 }

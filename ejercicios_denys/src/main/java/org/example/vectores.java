@@ -103,4 +103,14 @@ public class vectores {
                 System.out.println("Has perdido");
             }
         }
+
+        public void tablas(){
+
+            System.out.println("TABLAS DE MULTIPLICAR!!!");
+
+            Scanner entrada = new Scanner(System.in);
+
+
+
+        }
     }
