@@ -398,12 +398,19 @@ public class PrácticasUnidad3 {
 
     public void practicaSopaDeLetras(){
 
+        // Llamada de Scanner para capturar la entrada del usuario
+        // Creación de varibles comprobador (booleano) para repetir o no el bucle while en función de si la entrada es correcta o no
         Scanner entrada = new Scanner(System.in);
         boolean comprobador = true;
+
+        // Creación de contador de número de Filas y Columnas introducidas por el usuario
         int nFilas = 0;
         int nColumnas = 0;
 
+        //Como comprobador está definido en true, entramos en el bucle al menos, una vez
         while (comprobador) {
+
+            //Comprobamos que no se introduzcan caracteres cuando se espera números
             try {
                 System.out.print("Introduce el número de filas: ");
                 nFilas = entrada.nextInt();
@@ -411,38 +418,54 @@ public class PrácticasUnidad3 {
                 System.out.print("Introduce el número de columnas: ");
                 nColumnas = entrada.nextInt();
 
+                // Verificación de que las filas y columnas sean mayores que 0
+                // En caso de cumplir con la verificación actualizamos el comprobador a false y no volvemos a repetir el bucle
                 if (nFilas > 0 && nColumnas > 0){
                     comprobador = false;
                 }else {
                     System.out.println("ERROR. debes introducir un número positivo mayor que 0");
                 }
 
+                // Si se introduce un caracter capturará la excepción, mostrará mensaje de error y volverá a repetir el bucle
+                // Es decir, nos volverá a pedir las filas y columnas ya que comprobador no se ha actualizado a false
             } catch (InputMismatchException e) {
                 System.out.println("ERROR. Debes introducir un número" + e.getMessage());
-                entrada.next();
+                entrada.next(); //Necesario para limpiar el buffer ya que si no, entra en bucle infinito
             }
         }
 
+        // Creamos una matriz con el tamaño de número de filas y de columnas definido por el usuario
         String matriz[][] = new String[nFilas][nColumnas];
         String[] filaLetras;
+        // Creamos vector de tipo String para almacenar las letras que se quieran introducir en la matriz
 
+        // Con este bucle recorremos las filas de la matriz
         for (int i = 0; i < matriz.length; i++) {
-            System.out.print("Ingresa las letras de la fila " + (i + 1) + ": ");
-            filaLetras = entrada.next().split("");
 
+            System.out.print("Ingresa las letras de la fila " + (i + 1) + ": "); // Pedimos al usuario que ingrese un conjunto de valores para cada fila
+            filaLetras = entrada.next().split(""); // Separamos cada letra introducida por el usuario con el métod .split
+
+            // Ahora recorremos las columnas de cada fila almacenando cada posición del vector introducido en la matriz
             for (int j = 0; j < nColumnas; j++) {
+
+                // Comprobamos que la longitud del vector introducido sea el indicado
                 if (filaLetras.length < nColumnas || filaLetras.length > nColumnas) {
                     System.out.println("ERROR. Debes de introducir " + nColumnas + " letras por fila sin espacios ni separadores");
                     return;
+
+                    // Comprobamos que los caracteres introducidos sean o mayúsculas o minúsculas y o puedan ser números
                 }else if (!filaLetras[j].matches("[a-zA-Z]+")){
                     System.out.println("ERROR. Debes de introducir caracteres, NO NUMEROS.");
                     return;
+
+                    // Si esta correcto guardamos el valor del vector en cada una de las filas de la matriz
                 }else {
                     matriz[i][j] = filaLetras[j];
                 }
             }
         }
 
+        // Mostramos la matriz resultante con un bucle ForEach que es menos tedioso y más funcional a la hora de mostrar la matriz en pantalla
         for (String fila[] : matriz){
             for (String columna : fila){
                 System.out.print(columna + " ");
@@ -450,13 +473,18 @@ public class PrácticasUnidad3 {
             System.out.println();
         }
 
+        // Creación de una variable para almacenar la cadena de caracteres de la palabra que queramos buscar
         String palabraBuscar = "";
         comprobador = true;
+        // Actualizamos comprobador a true para volver a pedir la palabra a buscar en caso de que no cumpla con los requisitos
 
+        // Bucle para repetir en caso de que la palabra introducida no sea correcta, lo inicializamos sí o sí, al menos una vez, con comprobador true
         while (comprobador) {
             System.out.print("Introduce una palabra a buscar: ");
             palabraBuscar = entrada.next();
 
+            // Si la palabra introducida cumple con nuestros requisitos de longitud y de que solamente pueda contener caracteres en mayúscula
+            // o minúscula la damos como válida con comprobador = false (no volvemos a repetir el bucle para pedir la palabra)
             if (palabraBuscar.matches("[a-zA-Z]+") && palabraBuscar.length() <= nColumnas && palabraBuscar.length() > 0) {
                 comprobador = false;
             } else {
@@ -464,62 +492,29 @@ public class PrácticasUnidad3 {
             }
         }
 
+        // Creamos un vector para la palabra a buscar
         String palabraBuscarVector[] = new String [palabraBuscar.length()];
         for (int i = 0; i < palabraBuscar.length(); i++) {
             palabraBuscarVector[i] = palabraBuscar.substring(i, i+1);
         }
+        // Guardamos los caracteres de la palabra en el vector creado usando el métod .substring()
 
+        // Imprimimos el vector para ver que la palabra se ha guardado correctamente
         System.out.println(Arrays.toString(palabraBuscarVector));
 
+        // Creamos la posición de la fila y de la columna para, a la hora de encontrar la palabra a buscar, guardar su posición
         int posicionFila = 0;
         int posicionColumna = 0;
-        boolean palabraEncontrada = false;
 
-        bucle1:
+        // A PARTIR DE AQUÍ NO SÉ COMO IMPLEMENTAR LA LÓGICA DE PROGRAMACIÓN PARA BUSCAR LA PALABRA EN EL BUCLE
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
 
                 // Comprobar horizontalmente
-                if (j <= matriz[i].length - palabraBuscarVector.length) {
-                    boolean coincide = true;
-                    for (int k = 0; k < palabraBuscarVector.length; k++) {
-                        if (matriz[i][j + k] != palabraBuscarVector[k]) {
-                            coincide = false;
-                            break;
-                        }
-                    }
-                    if (coincide) {
-                        posicionFila = i;
-                        posicionColumna = j;
-                        palabraEncontrada = true;
-                        break bucle1;
-                    }
-                }
+                if (matriz[i][j] == palabraBuscarVector[0]) {
 
-                // Comprobar verticalmente
-                if (i <= matriz.length - palabraBuscarVector.length) {
-                    boolean coincide = true;
-                    for (int k = 0; k < palabraBuscarVector.length; k++) {
-                        if (matriz[i + k][j] != palabraBuscarVector[k]) {
-                            coincide = false;
-                            break;
-                        }
-                    }
-                    if (coincide) {
-                        posicionFila = i;
-                        posicionColumna = j;
-                        palabraEncontrada = true;
-                        break bucle1;
-                    }
                 }
             }
-        }
-
-        // Mostrar resultado
-        if (palabraEncontrada) {
-            System.out.println("La palabra comienza en la posición: " + posicionFila + " " + posicionColumna);
-        } else {
-            System.out.println("La palabra no se encontró.");
         }
     }
 }
