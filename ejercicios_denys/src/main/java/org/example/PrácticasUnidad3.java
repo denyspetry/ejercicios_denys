@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -392,6 +393,133 @@ public class PrácticasUnidad3 {
             System.out.println("Reintegro");
         } else {
             System.out.println("No premiado. No ha habido suerte...");
+        }
+    }
+
+    public void practicaSopaDeLetras(){
+
+        Scanner entrada = new Scanner(System.in);
+        boolean comprobador = true;
+        int nFilas = 0;
+        int nColumnas = 0;
+
+        while (comprobador) {
+            try {
+                System.out.print("Introduce el número de filas: ");
+                nFilas = entrada.nextInt();
+
+                System.out.print("Introduce el número de columnas: ");
+                nColumnas = entrada.nextInt();
+
+                if (nFilas > 0 && nColumnas > 0){
+                    comprobador = false;
+                }else {
+                    System.out.println("ERROR. debes introducir un número positivo mayor que 0");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("ERROR. Debes introducir un número" + e.getMessage());
+                entrada.next();
+            }
+        }
+
+        String matriz[][] = new String[nFilas][nColumnas];
+        String[] filaLetras;
+
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.print("Ingresa las letras de la fila " + (i + 1) + ": ");
+            filaLetras = entrada.next().split("");
+
+            for (int j = 0; j < nColumnas; j++) {
+                if (filaLetras.length < nColumnas || filaLetras.length > nColumnas) {
+                    System.out.println("ERROR. Debes de introducir " + nColumnas + " letras por fila sin espacios ni separadores");
+                    return;
+                }else if (!filaLetras[j].matches("[a-zA-Z]+")){
+                    System.out.println("ERROR. Debes de introducir caracteres, NO NUMEROS.");
+                    return;
+                }else {
+                    matriz[i][j] = filaLetras[j];
+                }
+            }
+        }
+
+        for (String fila[] : matriz){
+            for (String columna : fila){
+                System.out.print(columna + " ");
+            }
+            System.out.println();
+        }
+
+        String palabraBuscar = "";
+        comprobador = true;
+
+        while (comprobador) {
+            System.out.print("Introduce una palabra a buscar: ");
+            palabraBuscar = entrada.next();
+
+            if (palabraBuscar.matches("[a-zA-Z]+") && palabraBuscar.length() <= nColumnas && palabraBuscar.length() > 0) {
+                comprobador = false;
+            } else {
+                System.out.println("ERROR. La palabra sólo puede contener letras mayúsculas y minúsculas, sin separadores y con una longitud menor o igual a " + nColumnas);
+            }
+        }
+
+        String palabraBuscarVector[] = new String [palabraBuscar.length()];
+        for (int i = 0; i < palabraBuscar.length(); i++) {
+            palabraBuscarVector[i] = palabraBuscar.substring(i, i+1);
+        }
+
+        System.out.println(Arrays.toString(palabraBuscarVector));
+
+        int posicionFila = 0;
+        int posicionColumna = 0;
+        boolean palabraEncontrada = false;
+
+        bucle1:
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+
+                // Comprobar horizontalmente
+                if (j <= matriz[i].length - palabraBuscarVector.length) {
+                    boolean coincide = true;
+                    for (int k = 0; k < palabraBuscarVector.length; k++) {
+                        if (matriz[i][j + k] != palabraBuscarVector[k]) {
+                            coincide = false;
+                            break;
+                        }
+                    }
+                    if (coincide) {
+                        posicionFila = i;
+                        posicionColumna = j;
+                        palabraEncontrada = true;
+                        break bucle1;
+                    }
+                }
+
+                // Comprobar verticalmente
+                if (i <= matriz.length - palabraBuscarVector.length) {
+                    boolean coincide = true;
+                    for (int k = 0; k < palabraBuscarVector.length; k++) {
+                        if (matriz[i + k][j] != palabraBuscarVector[k]) {
+                            coincide = false;
+                            break;
+                        }
+                    }
+                    if (coincide) {
+                        posicionFila = i;
+                        posicionColumna = j;
+                        palabraEncontrada = true;
+                        break bucle1;
+                    }
+                }
+            }
+        }
+
+        // Mostrar resultado
+        if (palabraEncontrada) {
+            System.out.println("La palabra comienza en la posición: " + posicionFila + " " + posicionColumna);
+        } else {
+            System.out.println("La palabra no se encontró.");
         }
     }
 }
